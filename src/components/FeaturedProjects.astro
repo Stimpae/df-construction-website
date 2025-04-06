@@ -1,0 +1,85 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch all projects from the collection
+const allProjects = await getCollection('projects');
+
+// Get featured projects (first 3 for now)
+const featuredProjects = allProjects.slice(0, 3).map(project => ({
+  title: project.data.title,
+  description: project.data.description,
+  image: project.data.coverImage,
+  link: `/projects/${project.slug}`,
+  client: project.data.client,
+  category: project.data.services[0] // Use first service as category
+}));
+
+// If no projects found yet, use this placeholder data
+const fallbackProjects = featuredProjects.length ? [] : [
+  {
+    title: 'Modern Brick Residence',
+    description: 'A contemporary family home featuring custom brickwork and innovative design elements.',
+    image: '/images/projects/project1.jpg',
+    link: '/projects/project-1',
+    client: 'Johnson Family',
+    category: 'Residential'
+  },
+  {
+    title: 'Commercial Office Complex',
+    description: 'A multi-building office development with decorative masonry and structural brickwork.',
+    image: '/images/projects/project2.jpg',
+    link: '/projects/project-2',
+    client: 'Skyline Enterprises',
+    category: 'Commercial'
+  },
+  {
+    title: 'Heritage Building Restoration',
+    description: 'Careful restoration of a 19th century brick building, preserving historical features while updating infrastructure.',
+    image: '/images/projects/project3.jpg',
+    link: '/projects/project-3',
+    client: 'City Historical Society',
+    category: 'Restoration'
+  }
+];
+
+// Use actual projects if available, otherwise fallback to placeholders
+const projectsToDisplay = featuredProjects.length ? featuredProjects : fallbackProjects;
+---
+
+<section id="projects" class="py-20 bg-neutral-light">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-secondary font-heading">Our Featured Projects</h2>
+      <div class="w-24 h-1 bg-primary mx-auto my-4"></div>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Take a look at some of our recent work that showcases our expertise in bricklaying and construction.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projectsToDisplay.map(project => (
+        <ProjectCard
+          title={project.title}
+          description={project.description}
+          image={project.image}
+          link={project.link}
+          client={project.client}
+          category={project.category}
+        />
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <a 
+        href="/projects" 
+        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondary-light focus:outline-none"
+      >
+        View All Projects
+        <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

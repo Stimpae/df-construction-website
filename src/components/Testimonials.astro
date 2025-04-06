@@ -1,0 +1,52 @@
+---
+import TestimonialCard from './TestimonialCard.astro';
+
+// In a real implementation, you'd fetch testimonials from the content collection
+// For now, we'll use placeholder data
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    position: "Homeowner",
+    testimonial: "Working with this construction company was a wonderful experience. They transformed our backyard with beautiful brickwork that has become the highlight of our outdoor space. Their attention to detail was impressive.",
+    rating: 5
+  },
+  {
+    name: "Michael Roberts",
+    position: "Project Manager",
+    company: "Roberts Real Estate",
+    testimonial: "We've worked with many contractors over the years, but this team stands out for their professionalism and quality. The brickwork on our commercial property was completed on time and within budget.",
+    rating: 5
+  },
+  {
+    name: "Emily Williams",
+    position: "Architect",
+    company: "Williams & Associates",
+    testimonial: "As an architect, I have high standards for the execution of my designs. This company consistently delivers exceptional craftsmanship that brings our visions to life. Highly recommended!",
+    rating: 4
+  }
+];
+---
+
+<section id="testimonials" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-secondary font-heading">Client Testimonials</h2>
+      <div class="w-24 h-1 bg-primary mx-auto my-4"></div>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Don't just take our word for it - hear what our clients have to say about our work.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map(testimonial => (
+        <TestimonialCard
+          name={testimonial.name}
+          position={testimonial.position}
+          company={testimonial.company}
+          testimonial={testimonial.testimonial}
+          rating={testimonial.rating}
+        />
+      ))}
+    </div>
+  </div>
+</section>

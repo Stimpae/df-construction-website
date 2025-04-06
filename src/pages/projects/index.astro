@@ -1,0 +1,155 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch projects from the content collection
+const projectEntries = await getCollection('projects');
+
+// Map content collection entries to the format needed for the project cards
+const projectsFromCollection = projectEntries.map(project => ({
+  title: project.data.title,
+  description: project.data.description,
+  image: project.data.coverImage,
+  link: `/projects/${project.slug}`,
+  client: project.data.client,
+  category: project.data.services[0] // Using first service as category
+}));
+
+// If there are no projects in the collection yet, use these placeholders
+const placeholderProjects = projectsFromCollection.length ? [] : [
+  {
+    title: 'Modern Brick Residence',
+    description: 'A contemporary family home featuring custom brickwork and innovative design elements.',
+    image: '/images/projects/project1.jpg',
+    link: '/projects/project-1',
+    client: 'Johnson Family',
+    category: 'Residential'
+  },
+  {
+    title: 'Commercial Office Complex',
+    description: 'A multi-building office development with decorative masonry and structural brickwork.',
+    image: '/images/projects/project2.jpg',
+    link: '/projects/project-2',
+    client: 'Skyline Enterprises',
+    category: 'Commercial'
+  },
+  {
+    title: 'Heritage Building Restoration',
+    description: 'Careful restoration of a 19th century brick building, preserving historical features while updating infrastructure.',
+    image: '/images/projects/project3.jpg',
+    link: '/projects/project-3',
+    client: 'City Historical Society',
+    category: 'Restoration'
+  },
+  {
+    title: 'Luxury Apartment Building',
+    description: 'A high-end residential building with custom brickwork patterns and detailing.',
+    image: '/images/projects/project1.jpg', // Reusing images for placeholder
+    link: '/projects/project-4',
+    client: 'Metro Developers',
+    category: 'Residential'
+  },
+  {
+    title: 'Public Library Renovation',
+    description: 'Renovation and expansion of a community library with matching historical brick features.',
+    image: '/images/projects/project2.jpg', // Reusing images for placeholder
+    link: '/projects/project-5',
+    client: 'City Council',
+    category: 'Public'
+  },
+  {
+    title: 'Garden Wall & Outdoor Living',
+    description: 'Extensive landscaping project featuring brick garden walls, pathways, and an outdoor kitchen.',
+    image: '/images/projects/project3.jpg', // Reusing images for placeholder
+    link: '/projects/project-6',
+    client: 'Thompson Residence',
+    category: 'Landscaping'
+  }
+];
+
+// Use real projects if available, otherwise use placeholders
+const allProjects = projectsFromCollection.length ? projectsFromCollection : placeholderProjects;
+
+// Categories for filtering
+const categories = [...new Set(allProjects.map(project => project.category))];
+---
+
+<Layout title="Our Projects" description="Browse our portfolio of bricklaying and construction projects">
+  <div class="bg-gray-100 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-secondary font-heading">Our Projects</h1>
+      <p class="mt-2 text-lg text-gray-600">
+        Explore our diverse portfolio of bricklaying and construction projects across various sectors.
+      </p>
+    </div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Filter Categories -->
+    <div class="mb-10">
+      <div class="flex flex-wrap items-center gap-3">
+        <button 
+          class="filter-btn active px-4 py-2 rounded-full bg-primary text-white font-medium text-sm" 
+          data-category="all"
+        >
+          All Projects
+        </button>
+        
+        {categories.map(category => (
+          <button 
+            class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium text-sm hover:bg-gray-300" 
+            data-category={category}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {allProjects.map(project => (
+        <div class="project-card" data-category={project.category}>
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            image={project.image}
+            link={project.link}
+            client={project.client}
+            category={project.category}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Simple filtering functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active', 'bg-primary', 'text-white'));
+        filterBtns.forEach(b => b.classList.add('bg-gray-200', 'text-gray-700'));
+        btn.classList.add('active', 'bg-primary', 'text-white');
+        btn.classList.remove('bg-gray-200', 'text-gray-700');
+        
+        const category = btn.getAttribute('data-category');
+        
+        // Filter projects
+        projectCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

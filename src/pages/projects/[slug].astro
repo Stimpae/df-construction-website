@@ -1,0 +1,42 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get the slug from the URL
+export async function getStaticPaths() {
+  const projectEntries = await getCollection('projects');
+  
+  return projectEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Extract frontmatter values
+const { 
+  title, 
+  description, 
+  pubDate, 
+  coverImage, 
+  client, 
+  location, 
+  services, 
+  duration 
+} = entry.data;
+---
+
+<ProjectLayout
+  title={title}
+  description={description}
+  pubDate={pubDate}
+  coverImage={coverImage}
+  client={client}
+  location={location}
+  services={services}
+  duration={duration}
+>
+  <Content />
+</ProjectLayout>

@@ -1,0 +1,95 @@
+---
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Projects', path: '/projects' },
+  { name: 'Contact', path: '/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-20">
+      <div class="flex items-center">
+        <a href="/" class="flex-shrink-0 flex items-center">
+          <!-- Replace with your logo -->
+          <img class="h-12 w-auto" src="/images/logo.svg" alt="Your Construction Company" />
+          <span class="ml-3 text-xl font-bold text-secondary">YourCompany</span>
+        </a>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <div class="flex items-center lg:hidden">
+        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-primary hover:bg-gray-100 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+      
+      <!-- Desktop navigation -->
+      <div class="hidden lg:flex lg:items-center lg:ml-6">
+        <div class="flex space-x-8">
+          {navItems.map(item => (
+            <a 
+              href={item.path} 
+              class={`px-3 py-2 text-sm font-medium ${currentPath === item.path ? 'text-primary border-b-2 border-primary' : 'text-secondary hover:text-primary'}`}
+              aria-current={currentPath === item.path ? 'page' : undefined}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+        <div class="ml-8">
+          <a href="/contact" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none">
+            Get a Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile menu, show/hide based on menu state -->
+  <div id="mobile-menu" class="hidden lg:hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      {navItems.map(item => (
+        <a 
+          href={item.path} 
+          class={`block px-3 py-2 rounded-md text-base font-medium ${currentPath === item.path ? 'text-primary bg-gray-50' : 'text-secondary hover:bg-gray-50 hover:text-primary'}`}
+          aria-current={currentPath === item.path ? 'page' : undefined}
+        >
+          {item.name}
+        </a>
+      ))}
+      <a href="/contact" class="block w-full text-center mt-4 px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none">
+        Get a Quote
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+      mobileMenuButton.setAttribute('aria-expanded', !expanded);
+      mobileMenu.classList.toggle('hidden');
+
+      // Toggle icon between bars and times
+      const iconElement = mobileMenuButton.querySelector('i');
+      if (iconElement) {
+        if (iconElement.classList.contains('fa-bars')) {
+          iconElement.classList.remove('fa-bars');
+          iconElement.classList.add('fa-times');
+        } else {
+          iconElement.classList.remove('fa-times');
+          iconElement.classList.add('fa-bars');
+        }
+      }
+    });
+  }
+</script>
