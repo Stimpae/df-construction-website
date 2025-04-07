@@ -1,28 +1,34 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#e63946', // Example brand color (adjust to match your brand)
-          dark: '#c1121f',
-          light: '#f48c89',
+          DEFAULT: '#191a19',
+          dark: '#000000',
+          light: '#2a2a2a',
         },
         secondary: {
-          DEFAULT: '#1d3557', // Dark blue for headers/accents
-          light: '#457b9d',
+          DEFAULT: '#ff7420',
+          dark: '#e66000',
+          light: '#ff9447',
         },
         neutral: {
-          light: '#f1faee',
-          dark: '#2b2d42',
+          DEFAULT: '#f2f2f2', 
+          light: '#ffffff',
+          dark: '#d1d1d1',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Montserrat', 'sans-serif'],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        heading: ['Montserrat', ...defaultTheme.fontFamily.sans],
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 };

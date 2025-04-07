@@ -1,0 +1,63 @@
+---
+const services = [
+  {
+    id: "01",
+    title: "Restoration",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: "fa-hammer",
+  },
+  {
+    id: "02",
+    title: "Reconstruction",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: "fa-wrench",
+
+  },
+  {
+    id: "03",
+    title: "Bespoke Builds",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: "fa-building",
+  },
+  {
+    id: "04",
+    title: "New Builds",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: "fa-building",
+
+  }
+];
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <p class="text-secondary font-medium mb-2">WHAT WE OFFER</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-primary font-heading mb-6">SOME POSITIVE<br>WORDS SERVICES</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      
+    </div>
+    
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map((service, index) => (
+        <div class="group rounded-lg border border-gray-200 p-6 hover:border-secondary transition-all duration-300 bg-secondary text-white">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-white text-secondary">
+              <i class={`fas ${service.icon} text-xl`}></i>
+            </div>
+            <span class="text-2xl font-bold opacity-50">{service.id}</span>
+          </div>
+          
+          <h3 class="text-xl font-bold mb-3">{service.title}</h3>
+          <p class="mb-4 text-sm text-white/80">
+            {service.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

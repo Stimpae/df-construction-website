@@ -11,7 +11,7 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  color: #1a202c;
+  color: #191a19;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -29,29 +29,29 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.875rem;
   line-height: 1.25rem;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
 }
 
 .btn:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
 
 .btn-primary {
-  background-color: #e63946;
+  background-color: #191a19;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #c1121f;
+  background-color: #2a2a2a;
 }
 
 .btn-secondary {
-  background-color: #1d3557;
+  background-color: #ff7420;
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #457b9d;
+  background-color: #e66000;
 }
 
 /* Form Styles */

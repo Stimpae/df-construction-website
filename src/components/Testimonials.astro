@@ -1,9 +1,25 @@
 ---
 import TestimonialCard from './TestimonialCard.astro';
+import { getCollection } from 'astro:content';
 
-// In a real implementation, you'd fetch testimonials from the content collection
-// For now, we'll use placeholder data
-const testimonials = [
+// Fetch testimonials from the content collection
+const allTestimonials = await getCollection('testimonials');
+
+// Filter to get only featured testimonials (max 3)
+const featuredTestimonials = allTestimonials
+  .filter(testimonial => testimonial.data.featured === true)
+  .slice(0, 3)
+  .map(testimonial => ({
+    name: testimonial.data.name,
+    position: testimonial.data.position,
+    company: testimonial.data.company,
+    testimonial: testimonial.data.testimonial,
+    rating: testimonial.data.rating,
+    image: testimonial.data.image
+  }));
+
+// If there are no featured testimonials yet, use these placeholders
+const fallbackTestimonials = featuredTestimonials.length ? [] : [
   {
     name: "Sarah Johnson",
     position: "Homeowner",
@@ -25,6 +41,9 @@ const testimonials = [
     rating: 4
   }
 ];
+
+// Use actual testimonials if available, otherwise use fallbacks
+const testimonialsToDisplay = featuredTestimonials.length ? featuredTestimonials : fallbackTestimonials;
 ---
 
 <section id="testimonials" class="py-20 bg-white">
@@ -38,7 +57,7 @@ const testimonials = [
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {testimonials.map(testimonial => (
+      {testimonialsToDisplay.map(testimonial => (
         <TestimonialCard
           name={testimonial.name}
           position={testimonial.position}
