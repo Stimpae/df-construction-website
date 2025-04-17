@@ -2,7 +2,7 @@
 name: "Sarah Johnson"
 position: "Homeowner"
 company: ""
-testimonial: "Working with this construction company was a wonderful experience. They transformed our backyard with beautiful brickwork that has become the highlight of our outdoor space. Their attention to detail was impressive, and the team was always professional and respectful of our property. I would recommend them without hesitation to anyone looking for quality brickwork."
+testimonial: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel nisi nec justo tincidunt vehicula. Curabitur ac sapien ut libero fermentum tincidunt. Sed vitae eros a arcu vehicula facilisis."
 rating: 5
 date: "2023-06-15"
 projectType: "Residential"
