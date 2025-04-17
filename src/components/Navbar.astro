@@ -1,71 +1,108 @@
 ---
 const navItems = [
-  { name: 'Home', path: '/' },
-  { name: 'Services', path: '/#services' },
-  { name: 'Projects', path: '/projects' },
-  { name: 'About', path: '/#about' },
-  { name: 'Contact', path: '/contact' }
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/#services" },
+  { name: "Projects", path: "/projects" },
+  { name: "About", path: "/#about" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class="bg-white py-3 sticky top-0 left-0 right-0 z-50">
+<nav class="bg-white py-1 sticky top-0 left-0 right-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center h-12">
       <div class="flex items-center">
         <a href="/" class="flex-shrink-0 flex items-center">
           <!-- Logo -->
-          <img src="./images/logo/logo_no_name_contrast_15.JPG" alt="DF Construction Logo" class="h-12 w-auto">
+          <img
+            src="./images/logo/logo_no_name_contrast_15.JPG"
+            alt="DF Construction Logo"
+            class="h-9 w-auto"
+          />
         </a>
       </div>
-      
+
       <!-- Desktop navigation -->
       <div class="hidden lg:flex lg:items-center">
-        <div class="flex space-x-8">
-          {navItems.map(item => (
-            <a 
-              href={item.path} 
-              class={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${currentPath === item.path ? 'text-secondary' : 'text-primary hover:text-secondary'}`}
-              aria-current={currentPath === item.path ? 'page' : undefined}
-            >
-              {item.name}
-            </a>
-          ))}
+        <div class="flex space-x-5">
+          {
+            navItems.map((item) => (
+              <a
+                href={item.path}
+                class={`px-1 py-0.5 text-xs font-bold uppercase text-primary transition-colors duration-200 ${
+                  currentPath === item.path
+                    ? "text-secondary"
+                    : "hover:text-secondary"
+                }`}
+                aria-current={currentPath === item.path ? "page" : undefined}
+              >
+                {item.name}
+              </a>
+            ))
+          }
         </div>
         <div class="ml-8">
-          <a href="/contact" class="inline-flex items-center px-5 py-2 text-sm font-medium text-white bg-secondary hover:bg-secondary-dark transition-colors duration-200">
-            Contact Us
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          <a
+            href="/contact"
+            class="inline-flex items-center px-5 py-2 text-sm font-medium text-white bg-secondary hover:bg-secondary-light transition-colors duration-200"
+          >
+            Contact Us <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
           </a>
         </div>
       </div>
-      
+
       <!-- Mobile menu button -->
       <div class="flex items-center lg:hidden">
-        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded text-primary hover:text-secondary hover:bg-gray-100 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="inline-flex items-center justify-center p-1 rounded text-primary hover:text-secondary hover:bg-gray-100 focus:outline-none"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
           <span class="sr-only">Open main menu</span>
-          <i class="fas fa-bars text-xl"></i>
+          <i class="fas fa-bars text-lg"></i>
         </button>
       </div>
     </div>
   </div>
-  
+
   <!-- Mobile menu, show/hide based on menu state -->
   <div id="mobile-menu" class="hidden lg:hidden">
-    <div class="px-2 pt-2 pb-3 space-y-1 bg-white mt-2 mx-4">
-      {navItems.map(item => (
-        <a 
-          href={item.path} 
-          class={`block px-3 py-2 rounded-md text-base font-medium ${currentPath === item.path ? 'text-secondary' : 'text-primary hover:bg-gray-60 hover:text-primary'}`}
-          aria-current={currentPath === item.path ? 'page' : undefined}
-        >
-          {item.name}
-        </a>
-      ))}
-      <a href="/contact" class="block w-full text-center mt-4 px-4 py-2 text-base font-medium text-white bg-secondary hover:bg-white focus:outline-none transition-colors duration-200 hover:text-primary transition-colors">
+    <div class="px-2 pt-2 pb-2 space-y-1 bg-white mt-1 mx-4 shadow-md rounded">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.path}
+            class={`block px-2 py-1.5 text-xs font-bold uppercase ${
+              currentPath === item.path
+                ? "text-primary border border-secondary bg-secondary/5"
+                : "text-primary hover:border hover:border-secondary hover:bg-secondary/5"
+            }`}
+            aria-current={currentPath === item.path ? "page" : undefined}
+          >
+            {item.name}
+          </a>
+        ))
+      }
+      <a
+        href="/contact"
+        class="block w-full text-center mt-2 px-3 py-1.5 text-xs font-bold uppercase text-white bg-secondary hover:bg-secondary-light focus:outline-none transition-colors duration-200"
+      >
         Contact Us
       </a>
     </div>
@@ -74,24 +111,25 @@ const currentPath = Astro.url.pathname;
 
 <script>
   // Mobile menu toggle
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
   if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-      const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-      mobileMenuButton.setAttribute('aria-expanded', !expanded);
-      mobileMenu.classList.toggle('hidden');
+    mobileMenuButton.addEventListener("click", () => {
+      const expanded =
+        mobileMenuButton.getAttribute("aria-expanded") === "true";
+      mobileMenuButton.setAttribute("aria-expanded", !expanded);
+      mobileMenu.classList.toggle("hidden");
 
       // Toggle icon between bars and times
-      const iconElement = mobileMenuButton.querySelector('i');
+      const iconElement = mobileMenuButton.querySelector("i");
       if (iconElement) {
-        if (iconElement.classList.contains('fa-bars')) {
-          iconElement.classList.remove('fa-bars');
-          iconElement.classList.add('fa-times');
+        if (iconElement.classList.contains("fa-bars")) {
+          iconElement.classList.remove("fa-bars");
+          iconElement.classList.add("fa-times");
         } else {
-          iconElement.classList.remove('fa-times');
-          iconElement.classList.add('fa-bars');
+          iconElement.classList.remove("fa-times");
+          iconElement.classList.add("fa-bars");
         }
       }
     });

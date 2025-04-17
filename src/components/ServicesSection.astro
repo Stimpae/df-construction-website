@@ -4,56 +4,75 @@ const services = [
     id: "01",
     title: "Restoration",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    icon: "fa-hammer",
+    image: "/images/hero_stock_photo_01.jpg",
   },
   {
     id: "02",
     title: "Reconstruction",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    icon: "fa-wrench",
-
+    image: "/images/hero_stock_photo_01.jpg",
   },
   {
     id: "03",
     title: "Bespoke Builds",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    icon: "fa-building",
+    image: "/images/hero_stock_photo_01.jpg",
   },
   {
     id: "04",
     title: "New Builds",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    icon: "fa-building",
-
+    image: "/images/hero_stock_photo_01.jpg",
   }
 ];
 ---
 
-<section class="py-20 bg-white">
+<section id="services" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Header -->
-    <div class="text-center mb-16">
-      <p class="text-secondary font-medium mb-2">WHAT WE OFFER</p>
-      <h2 class="text-3xl md:text-4xl font-bold text-primary font-heading mb-6">SOME POSITIVE<br>WORDS SERVICES</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto mb-8">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      
+    <!-- Header with horizontal line -->
+    <div class="flex items-center mb-8">
+      <div class="w-12 h-[0.5px] bg-black mr-4"></div>
+      <p class="text-primary text-sm font-bold uppercase tracking-wider">OUR SERVICES</p>
     </div>
     
-    <!-- Services Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Main heading and description in two columns -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-primary leading-tight">
+          A comprehensive<br>set of services
+        </h2>
+      </div>
+      <div>
+        <p class="text-gray-800 text-lg">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Bottom border -->
+    <div class="w-full h-[0.5px] bg-gray-600 mb-8"></div>
+    
+    <!-- Services Grid with brick stacking effect -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {services.map((service, index) => (
-        <div class="group rounded-lg border border-gray-200 p-6 hover:border-secondary transition-all duration-300 bg-secondary text-white">
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-white text-secondary">
-              <i class={`fas ${service.icon} text-xl`}></i>
-            </div>
-            <span class="text-2xl font-bold opacity-50">{service.id}</span>
+        <div class={`group ${index % 2 === 0 ? 'md:mt-0' : 'md:mt-8'}`}>
+          <!-- Image Container with overlay -->
+          <div class="relative aspect-square overflow-hidden mb-4">
+            <img 
+              src={service.image} 
+              alt={service.title} 
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <!-- Black overlay filter -->
+            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>
           </div>
           
-          <h3 class="text-xl font-bold mb-3">{service.title}</h3>
-          <p class="mb-4 text-sm text-white/80">
+          <!-- Content with number positioned to the right of title -->
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl font-bold text-primary">{service.title}</h3>
+            <span class="text-2xl font-bold text-gray-300">{service.id}</span>
+          </div>
+          <p class="text-gray-600 text-sm">
             {service.description}
           </p>
         </div>
