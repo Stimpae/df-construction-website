@@ -7,14 +7,13 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#191a19',
-          dark: '#000000',
-          light: '#2a2a2a',
+          DEFAULT: '#37363b',
+          light: '#4f4e54',
+
         },
         secondary: {
-          DEFAULT: '#ff7420',
-          dark: '#e66000',
-          light: '#ff9447',
+          DEFAULT: '#d65c33',
+          light: '#e67e22',
         },
         neutral: {
           DEFAULT: '#f2f2f2', 
@@ -23,8 +22,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
-        heading: ['Montserrat', ...defaultTheme.fontFamily.sans],
+        sans: ['Arial', ...defaultTheme.fontFamily.sans],
+        heading: ['Poppins', ...defaultTheme.fontFamily.sans],
       },
     },
   },

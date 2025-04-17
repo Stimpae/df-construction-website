@@ -9,13 +9,20 @@ html {
   scroll-padding-top: 5rem;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Arial', sans-serif;
   color: #191a19;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 /* Custom component styles */

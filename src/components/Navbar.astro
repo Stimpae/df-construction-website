@@ -1,29 +1,23 @@
 ---
 const navItems = [
   { name: 'Home', path: '/' },
-// { name: 'Projects', path: '/projects' },
-//  { name: 'Contact', path: '/contact' },
+  { name: 'Services', path: '/#services' },
+  { name: 'Projects', path: '/projects' },
+  { name: 'About', path: '/#about' },
+  { name: 'Contact', path: '/contact' }
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class="absolute top-0 left-0 right-0 z-10 py-4">
+<nav class="bg-white py-3 sticky top-0 left-0 right-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
         <a href="/" class="flex-shrink-0 flex items-center">
           <!-- Logo -->
-          <span class="text-2xl font-bold text-white">DF<span class="text-secondary">Construction</span></span>
+          <img src="./images/logo/logo_no_name_contrast_15.JPG" alt="DF Construction Logo" class="h-12 w-auto">
         </a>
-      </div>
-      
-      <!-- Mobile menu button -->
-      <div class="flex items-center lg:hidden">
-        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded text-white hover:text-secondary hover:bg-primary-light focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <i class="fas fa-bars text-xl"></i>
-        </button>
       </div>
       
       <!-- Desktop navigation -->
@@ -32,7 +26,7 @@ const currentPath = Astro.url.pathname;
           {navItems.map(item => (
             <a 
               href={item.path} 
-              class={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${currentPath === item.path ? 'text-secondary' : 'text-white hover:text-secondary hover:bg-primary-light'}`}
+              class={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${currentPath === item.path ? 'text-secondary' : 'text-primary hover:text-secondary'}`}
               aria-current={currentPath === item.path ? 'page' : undefined}
             >
               {item.name}
@@ -40,34 +34,39 @@ const currentPath = Astro.url.pathname;
           ))}
         </div>
         <div class="ml-8">
-          <a href="/contact" class="inline-flex items-center px-4 py-2 text-sm font-medium rounded text-white bg-secondary hover:bg-secondary-dark transition-colors duration-200">
-            Get a Quote
+          <a href="/contact" class="inline-flex items-center px-5 py-2 text-sm font-medium text-white bg-secondary hover:bg-secondary-dark transition-colors duration-200">
+            Contact Us
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </a>
         </div>
       </div>
+      
+      <!-- Mobile menu button -->
+      <div class="flex items-center lg:hidden">
+        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded text-primary hover:text-secondary hover:bg-gray-100 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
     </div>
   </div>
   
   <!-- Mobile menu, show/hide based on menu state -->
   <div id="mobile-menu" class="hidden lg:hidden">
-    <div class="px-2 pt-2 pb-3 space-y-1 bg-primary bg-opacity-90 mt-2 rounded-md mx-4">
+    <div class="px-2 pt-2 pb-3 space-y-1 bg-white mt-2 mx-4">
       {navItems.map(item => (
         <a 
           href={item.path} 
-          class={`block px-3 py-2 rounded-md text-base font-medium ${currentPath === item.path ? 'text-secondary' : 'text-white hover:bg-primary-light hover:text-secondary'}`}
+          class={`block px-3 py-2 rounded-md text-base font-medium ${currentPath === item.path ? 'text-secondary' : 'text-primary hover:bg-gray-60 hover:text-primary'}`}
           aria-current={currentPath === item.path ? 'page' : undefined}
         >
           {item.name}
         </a>
       ))}
-      <a href="/contact" class="block w-full text-center mt-4 px-4 py-2 text-base font-medium rounded-md text-white bg-secondary hover:bg-secondary-dark focus:outline-none transition-colors duration-200">
-        Get a Quote
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
+      <a href="/contact" class="block w-full text-center mt-4 px-4 py-2 text-base font-medium text-white bg-secondary hover:bg-white focus:outline-none transition-colors duration-200 hover:text-primary transition-colors">
+        Contact Us
       </a>
     </div>
   </div>
