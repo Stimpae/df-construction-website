@@ -4,7 +4,7 @@ const navItems = [
   { name: "Services", path: "/#services" },
   { name: "Projects", path: "/projects" },
   { name: "About", path: "/#about" },
-  { name: "Contact", path: "/contact" },
+  { name: "Contact", path: "/#contact" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -17,7 +17,7 @@ const currentPath = Astro.url.pathname;
         <a href="/" class="flex-shrink-0 flex items-center">
           <!-- Logo -->
           <img
-            src="./images/logo/logo_no_name_contrast_15.JPG"
+            src="/images/logo/logo_no_name_contrast_15.JPG"
             alt="DF Construction Logo"
             class="h-9 w-auto"
           />

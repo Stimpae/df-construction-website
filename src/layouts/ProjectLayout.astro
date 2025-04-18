@@ -16,61 +16,88 @@ const { title, description, pubDate, coverImage, client, location, services, dur
 ---
 
 <Layout title={title} description={description}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="mb-8">
-      <a href="/projects" class="text-secondary-light hover:text-secondary inline-flex items-center">
-        <i class="fas fa-arrow-left mr-2"></i> Back to Projects
-      </a>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2">
-        <img src={coverImage} alt={title} class="w-full h-auto rounded-lg shadow-lg mb-6 object-cover" />
-        
-        <h1 class="text-3xl sm:text-4xl font-bold font-heading text-secondary mb-4">{title}</h1>
-        <p class="text-lg text-gray-700 mb-8">{description}</p>
-        
-        <div class="prose max-w-none">
-          <slot />
-        </div>
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Back Navigation -->
+      <div class="mb-8">
+        <a href="/projects" class="inline-flex items-center text-primary hover:text-secondary transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Projects
+        </a>
       </div>
       
-      <div class="lg:col-span-1">
-        <div class="bg-neutral-light p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-bold text-secondary mb-4">Project Details</h3>
-          
-          <div class="space-y-4">
-            <div>
-              <p class="font-semibold">Client:</p>
-              <p>{client}</p>
-            </div>
-            
-            <div>
-              <p class="font-semibold">Location:</p>
-              <p>{location}</p>
-            </div>
-            
-            <div>
-              <p class="font-semibold">Completion Date:</p>
-              <p>{pubDate}</p>
-            </div>
-            
-            <div>
-              <p class="font-semibold">Duration:</p>
-              <p>{duration}</p>
-            </div>
-            
-            <div>
-              <p class="font-semibold">Services Provided:</p>
-              <ul class="list-disc pl-5 mt-2">
-                {services.map(service => (
-                  <li>{service}</li>
-                ))}
-              </ul>
+      <!-- Main heading and description -->
+      <!-- Main heading and description in two columns -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-4 lg:gap-6 mb-10">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-primary leading-tight">
+          {title}
+        </h2>
+      </div>
+      <div class="flex flex-col justify-end">
+        <p class="text-gray-600 text-base font-medium leading-relaxed">
+          {description}
+        </p>
+      </div>
+    </div>
+
+      <!-- Bottom border -->
+      <div class="w-full h-[0.5px] bg-gray-400 mb-8"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <img src={coverImage} alt={title} class="w-full h-auto object-cover" />
+        </div>
+        
+        <div class="lg:col-span-1">
+          <div class="bg-white p-6 border border-gray-100">
+            <div class="space-y-4">
+              <div>
+                <p class="font-semibold text-primary">Client:</p>
+                <p class="text-gray-700">{client}</p>
+              </div>
+              
+              <div>
+                <p class="font-semibold text-primary">Location:</p>
+                <p class="text-gray-700">{location}</p>
+              </div>
+              
+              <div>
+                <p class="font-semibold text-primary">Completion Date:</p>
+                <p class="text-gray-700">{pubDate}</p>
+              </div>
+              
+              <div>
+                <p class="font-semibold text-primary">Duration:</p>
+                <p class="text-gray-700">{duration}</p>
+              </div>
+              
+              <div>
+                <p class="font-semibold text-primary">Services Provided:</p>
+                <ul class="list-disc pl-5 mt-2 text-gray-700">
+                  {services.map(service => (
+                    <li>{service}</li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div class="pt-4">
+                <a 
+                  href="/#contact" 
+                  class="block w-full px-6 py-4 bg-black text-white text-center rounded-full font-medium hover:text-white hover:bg-primary/90 transition-colors duration-200"
+                >
+                  Get a quote
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 inline-block ml-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </Layout>

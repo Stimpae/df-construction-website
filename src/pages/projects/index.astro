@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import ContactSection from '../../components/ContactSection.astro';
 import { getCollection } from 'astro:content';
 
 // Fetch projects from the content collection
@@ -16,112 +16,91 @@ const projectsFromCollection = projectEntries.map(project => ({
   category: project.data.services[0] // Using first service as category
 }));
 
-// If there are no projects in the collection yet, use these placeholders
-const placeholderProjects = projectsFromCollection.length ? [] : [
-  {
-    title: 'Modern Brick Residence',
-    description: 'A contemporary family home featuring custom brickwork and innovative design elements.',
-    image: '/images/projects/project1.jpg',
-    link: '/projects/project-1',
-    client: 'Johnson Family',
-    category: 'Residential'
-  },
-  {
-    title: 'Commercial Office Complex',
-    description: 'A multi-building office development with decorative masonry and structural brickwork.',
-    image: '/images/projects/project2.jpg',
-    link: '/projects/project-2',
-    client: 'Skyline Enterprises',
-    category: 'Commercial'
-  },
-  {
-    title: 'Heritage Building Restoration',
-    description: 'Careful restoration of a 19th century brick building, preserving historical features while updating infrastructure.',
-    image: '/images/projects/project3.jpg',
-    link: '/projects/project-3',
-    client: 'City Historical Society',
-    category: 'Restoration'
-  },
-  {
-    title: 'Luxury Apartment Building',
-    description: 'A high-end residential building with custom brickwork patterns and detailing.',
-    image: '/images/projects/project1.jpg', // Reusing images for placeholder
-    link: '/projects/project-4',
-    client: 'Metro Developers',
-    category: 'Residential'
-  },
-  {
-    title: 'Public Library Renovation',
-    description: 'Renovation and expansion of a community library with matching historical brick features.',
-    image: '/images/projects/project2.jpg', // Reusing images for placeholder
-    link: '/projects/project-5',
-    client: 'City Council',
-    category: 'Public'
-  },
-  {
-    title: 'Garden Wall & Outdoor Living',
-    description: 'Extensive landscaping project featuring brick garden walls, pathways, and an outdoor kitchen.',
-    image: '/images/projects/project3.jpg', // Reusing images for placeholder
-    link: '/projects/project-6',
-    client: 'Thompson Residence',
-    category: 'Landscaping'
-  }
-];
 
 // Use real projects if available, otherwise use placeholders
-const allProjects = projectsFromCollection.length ? projectsFromCollection : placeholderProjects;
+const allProjects = projectsFromCollection;
 
 // Categories for filtering
 const categories = [...new Set(allProjects.map(project => project.category))];
 ---
 
 <Layout title="Our Projects" description="Browse our portfolio of bricklaying and construction projects">
-  <div class="bg-gray-100 py-10">
+  <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-bold text-secondary font-heading">Our Projects</h1>
-      <p class="mt-2 text-lg text-gray-600">
-        Explore our diverse portfolio of bricklaying and construction projects across various sectors.
-      </p>
-    </div>
-  </div>
-  
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Filter Categories -->
-    <div class="mb-10">
-      <div class="flex flex-wrap items-center gap-3">
-        <button 
-          class="filter-btn active px-4 py-2 rounded-full bg-primary text-white font-medium text-sm" 
-          data-category="all"
-        >
-          All Projects
-        </button>
-        
-        {categories.map(category => (
+      <!-- Header with horizontal line -->
+      <div class="flex items-center mb-2 md:mb-3 lg:mb-8">
+        <div class="w-6 h-[0.5px] bg-gray-600 mr-4"></div>
+        <p class="text-primary text-sm uppercase tracking-wider flex-end">OUR PROJECTS</p>
+      </div>
+      
+      <!-- Main heading and description in two columns -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-4 lg:gap-6 mb-10">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-heading font-bold text-primary leading-tight">
+            Browse our complete<br>portfolio of work
+          </h2>
+        </div>
+        <div class="flex flex-col justify-end">
+          <div class="flex justify-between">
+            <p class="text-gray-600 text-base font-medium leading-relaxed">
+              Take a look at some of our recent projects, from restoration to bespoke builds. if you have a project in mind,
+              that isn't displayed here, get in touch with us today.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bottom border -->
+      <div class="w-full h-[0.5px] bg-gray-400 mb-8"></div>
+      
+      <!-- Filter Categories -->
+      <div class="flex flex-wrap mb-12">
+        <div class="inline-flex flex-wrap items-center gap-3">
           <button 
-            class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium text-sm hover:bg-gray-300" 
-            data-category={category}
+            class="filter-btn active px-4 py-2 rounded-full bg-primary text-white font-medium text-sm" 
+            data-category="all"
           >
-            {category}
+            All Projects
           </button>
+          
+          {categories.map(category => (
+            <button 
+              class="filter-btn px-4 py-2 bg-white rounded-full text-primary font-medium text-sm border border-black hover:bg-primary hover:text-white transition-colors" 
+              data-category={category}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Projects Grid - Using CSS Grid for layout -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        {allProjects.map((project, index) => (
+          <div class="project-card overflow-hidden h-[400px]" data-category={project.category}>
+            <a href={project.link} class="block group h-full">
+              <div class="relative overflow-hidden h-full">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <!-- Hover overlay -->
+                <div class="absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-lg font-bold text-primary">{project.title}</h3>
+                  <p class="text-gray-700 text-sm line-clamp-2">{project.description}</p>
+                </div>
+              </div>
+            </a>
+          </div>
         ))}
       </div>
     </div>
-    
-    <!-- Projects Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {allProjects.map(project => (
-        <div class="project-card" data-category={project.category}>
-          <ProjectCard
-            title={project.title}
-            description={project.description}
-            image={project.image}
-            link={project.link}
-            client={project.client}
-            category={project.category}
-          />
-        </div>
-      ))}
-    </div>
+  </section>
+  
+  <!-- Add Contact Section from Homepage with ID for linking -->
+  <div id="contact">
+    <ContactSection />
   </div>
 </Layout>
 
@@ -135,9 +114,9 @@ const categories = [...new Set(allProjects.map(project => project.category))];
       btn.addEventListener('click', () => {
         // Update active button
         filterBtns.forEach(b => b.classList.remove('active', 'bg-primary', 'text-white'));
-        filterBtns.forEach(b => b.classList.add('bg-gray-200', 'text-gray-700'));
+        filterBtns.forEach(b => b.classList.add('bg-white', 'text-primary', 'border', 'border-black'));
         btn.classList.add('active', 'bg-primary', 'text-white');
-        btn.classList.remove('bg-gray-200', 'text-gray-700');
+        btn.classList.remove('bg-white', 'text-primary', 'border', 'border-black');
         
         const category = btn.getAttribute('data-category');
         
@@ -149,6 +128,14 @@ const categories = [...new Set(allProjects.map(project => project.category))];
             card.style.display = 'none';
           }
         });
+      });
+    });
+    
+    // Smooth scroll for contact link
+    document.querySelector('a[href="#contact"]').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('#contact').scrollIntoView({
+        behavior: 'smooth'
       });
     });
   });

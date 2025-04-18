@@ -16,6 +16,12 @@ const featuredProjects = allProjects.slice(0, 6).map(project => ({
 
 // Use actual projects if available, otherwise use fallbacks
 const projectsToDisplay = featuredProjects;
+
+// Service areas
+const serviceAreas = [
+  "Bristol", "Bath", "Gloucester", "Cheltenham", "Swindon", 
+  "Cardiff", "Newport", "Weston-super-Mare", "Taunton", "Exeter"
+];
 ---
 
 <section id="projects" class="py-20 bg-neutral">
@@ -58,24 +64,41 @@ const projectsToDisplay = featuredProjects;
       ))}
     </div>
     
-    <div class="flex flex-col gap-3 justify-center md:flex-row lg:flex-row lg:gap-4">
-      <a 
-        href="/contact" 
-        class="px-6 py-4 lg:px-8 bg-black text-white text-center rounded-full font-semiboldfont-medium hover:text-white hover:bg-primary/90 transition-colors duration-200"
-      >
-        Get a quote
-
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 inline-block ml-2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </a>
-      
-      <a 
-        href="/projects" 
-        class="px-6 py-4 lg:px-8 border border-black text-black text-center rounded-full font-medium hover:text-white hover:bg-primary transition-colors duration-200"
-      >
-        Browse Projects
-      </a>
-    </div>
+        <!-- Service Areas Section -->
+        <div class="mt-8 text-center">
+          <h3 class="text-xl lg:text-2xl font-medium text-primary mb-4">Where we have worked</h3>
+          <div class="flex flex-wrap justify-center gap-1 md:gap-3 mb-6">
+            {serviceAreas.map(area => (
+              <span class="px-4 py-2 bg-white rounded-full text-primary text-sm font-medium border border-gray-200">
+                {area}
+              </span>
+            ))}
+          </div>  
+          <p class="text-gray-600 max-w-xl mx-auto mb-6">
+            Don't see your location on the list? no trouble, just get in touch and we can see if we can help you out.
+          </p>
+    
+          <div class="flex flex-col gap-3 justify-center md:flex-row lg:flex-row lg:gap-4">
+            <a 
+              href="/#contact" 
+              class="px-6 py-4 lg:px-8 bg-black text-white text-center rounded-full font-semiboldfont-medium hover:text-white hover:bg-primary/90 transition-colors duration-200"
+            >
+              Get a quote
+    
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 inline-block ml-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            
+            <a 
+              href="/projects" 
+              class="px-6 py-4 lg:px-8 border border-black text-black text-center rounded-full font-medium hover:text-white hover:bg-primary transition-colors duration-200"
+            >
+              Browse Projects
+            </a>
+          </div>
+          
+          
+        </div>
   </div>
 </section>
