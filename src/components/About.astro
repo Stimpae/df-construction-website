@@ -1,18 +1,127 @@
-<section id="about" class="py-20 bg-neutral">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <p class="text-secondary font-medium mb-2">ABOUT US</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-primary font-heading mb-6">TRUSTED BRICKLAYERS <br> SINCE 1993</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto mb-8">
-          Cras et fermentum ex, et rhoncus velit. Nullam vestibulum eu purus ultrices egestas. Mauris vitae ligula in mi laoreet bibendum. Quisque ultricies lorem non ullamcorper accumsan. Suspendisse magna quam, viverra convallis dictum sed, malesuada vel lectus. Praesent vulputate enim ut nunc consequat, a imperdiet arcu pellentesque.
-        </p>
-        <a href="/contact" class="inline-flex items-center px-6 py-3 bg-secondary text-white font-medium rounded-md hover:bg-secondary-dark transition-colors duration-200">
-          Contact Us
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
+<section id="about" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative">
+      <!-- 2x2 Grid layout for About content -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Top Right: Company info (appears first on all devices) -->
+        <div class="md:order-2 lg:order-2 order-1">
+          <!-- Header with horizontal line -->
+          <div class="flex items-center mb-4 md:mb-6 lg:mb-8">
+            <div class="w-6 h-[0.5px] bg-gray-600 mr-4"></div>
+            <p class="text-primary text-sm uppercase tracking-wider">ABOUT US</p>
+          </div>
+
+          <!-- Main heading and description -->
+          <div class="mb-10">
+            <h2 class="text-4xl md:text-5xl font-heading font-bold text-primary leading-tight">
+              Some kind of heading<br />about company
+            </h2>
+            <p class="text-gray-600 text-base font-medium leading-relaxed mt-6">
+              lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost
+              rud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+              <br /><br />
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+
+          <!-- Bottom border -->
+          <div class="w-full h-[0.5px] bg-gray-400 mb-8"></div>
+        </div>
+        
+        <!-- Top Left: Photo 1 (appears second on mobile/tablet) -->
+        <div class="relative overflow-hidden order-2 md:order-1 lg:order-1">
+          <img
+            src="/images/hero_stock_photo_01.jpg"
+            alt="DF Construction at work"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- Bottom Left: Our Values (appears third on all devices) -->
+        <div class="md:order-3 order-3 md:mt-6"> 
+          <h3 class="text-2xl font-bold text-primary uppercase mb-6">
+            Our Values
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-8">
+            <!-- Value 1 -->
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <h4 class="text-lg font-bold text-primary">
+                  Quality Craftsmanship
+                </h4>
+                <span class="text-xl font-bold text-gray-400">01</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+
+            <!-- Value 2 -->
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <h4 class="text-lg font-bold text-primary">
+                  Exceptional Standards
+                </h4>
+                <span class="text-xl font-bold text-gray-400">02</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+
+            <!-- Value 3 -->
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <h4 class="text-lg font-bold text-primary">
+                  Clear Communication
+                </h4>
+                <span class="text-xl font-bold text-gray-400">03</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+
+            <!-- Value 4 -->
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <h4 class="text-lg font-bold text-primary">
+                  Customer Satisfaction
+                </h4>
+                <span class="text-xl font-bold text-gray-400">04</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="mt-10 flex flex-col gap-3 justify-start md:flex-row lg:flex-row lg:gap-4">
+            <a 
+              href="/contact" 
+              class="px-6 py-4 lg:px-8 bg-black text-white text-center rounded-full font-medium hover:text-white hover:bg-primary/90 transition-colors duration-200"
+            >
+              Get a quote
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 inline-block ml-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom Right: Photo 2 -->
+        <div class="relative overflow-hidden md:order-4 order-4 md:mt-6">
+          <img
+            src="/images/hero_stock_photo_01.jpg"
+            alt="DF Construction quality work"
+            class="w-full h-full object-cover"
+          />
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

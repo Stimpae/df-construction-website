@@ -16,62 +16,56 @@ html {
 
 body {
   font-family: 'Arial', sans-serif;
-  color: #191a19;
+  color: #0a0a0a;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  font-family: 'Mona Sans', sans-serif;
 }
 
-/* Custom component styles */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease-in-out;
+/* Grid layout with template areas */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 140px);
+  gap: 1rem;
+  grid-template-areas: 
+    "proj1 proj2 proj3"
+    "proj1 proj2 proj3"
+    "proj4 proj2 proj6"
+    "proj4 proj5 proj6"
+    "proj4 proj5 proj6";
 }
 
-.btn:focus {
-  outline: none;
+.project-1 { grid-area: proj1; }
+.project-2 { grid-area: proj2; }
+.project-3 { grid-area: proj3; }
+.project-4 { grid-area: proj4; }
+.project-5 { grid-area: proj5; }
+.project-6 { grid-area: proj6; }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "proj1 proj1 proj2 proj2 proj2"
+      "proj3 proj3 proj3 proj4 proj4"
+      "proj5 proj5 proj6 proj6 proj6";
+  }
 }
 
-.btn-primary {
-  background-color: #191a19;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #2a2a2a;
-}
-
-.btn-secondary {
-  background-color: #ff7420;
-  color: white;
-}
-
-.btn-secondary:hover {
-  background-color: #e66000;
-}
-
-/* Form Styles */
-input, textarea, select {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: #e63946;
-  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "proj1"
+      "proj2"
+      "proj3"
+      "proj4"
+      "proj5"
+      "proj6";
+  }
 }

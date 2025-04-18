@@ -1,12 +1,11 @@
 ---
-import ProjectCard from './ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
 // Fetch all projects from the collection
 const allProjects = await getCollection('projects');
 
-// Get featured projects (first 3 for now)
-const featuredProjects = allProjects.slice(0, 3).map(project => ({
+// Get featured projects (up to 6)
+const featuredProjects = allProjects.slice(0, 6).map(project => ({
   title: project.data.title,
   description: project.data.description,
   image: project.data.coverImage,
@@ -15,90 +14,67 @@ const featuredProjects = allProjects.slice(0, 3).map(project => ({
   category: project.data.services[0] // Use first service as category
 }));
 
-// If no projects found yet, use this placeholder data
-const fallbackProjects = featuredProjects.length ? [] : [
-  {
-    title: 'Modern Brick Residence',
-    description: 'A contemporary family home featuring custom brickwork and innovative design elements.',
-    image: '/images/projects/project1.jpg',
-    link: '/projects/project-1',
-    client: 'Johnson Family',
-    category: 'Residential'
-  },
-  {
-    title: 'Commercial Office Complex',
-    description: 'A multi-building office development with decorative masonry and structural brickwork.',
-    image: '/images/projects/project2.jpg',
-    link: '/projects/project-2',
-    client: 'Skyline Enterprises',
-    category: 'Commercial'
-  },
-  {
-    title: 'Heritage Building Restoration',
-    description: 'Careful restoration of a 19th century brick building, preserving historical features while updating infrastructure.',
-    image: '/images/projects/project3.jpg',
-    link: '/projects/project-3',
-    client: 'City Historical Society',
-    category: 'Restoration'
-  }
-];
-
-// Use actual projects if available, otherwise fallback to placeholders
-const projectsToDisplay = featuredProjects.length ? featuredProjects : fallbackProjects;
+// Use actual projects if available, otherwise use fallbacks
+const projectsToDisplay = featuredProjects;
 ---
 
-<section id="projects" class="py-20 bg-secondary">
+<section id="projects" class="py-20 bg-neutral">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <p class="text-white font-medium mb-2">OUR WORK</p>
-      <h2 class="text-3xl md:text-4xl font-bold text-white font-heading mb-6">FEATURED PROJECTS</h2>
+    <!-- Centered header -->
+    <div class="text-center mb-8">
+      <!-- Header with horizontal line -->
+      <div class="flex items-center justify-center mb-2 md:mb-3 lg:mb-8">
+      <div class="w-6 h-[0.5px] bg-gray-600 mr-4"></div>
+      <p class="text-primary text-sm uppercase tracking-wider">FEATURED PROJECTS</p>
+      <div class="w-6 h-[0.5px] bg-gray-600 ml-4"></div>
+      </div>
+      <h2 class="max-w-xl mx-auto text-4xl md:text-5xl font-heading font-bold text-primary leading-tight mb-8">
+      Take a look at some of our most recent projects
+      </h2>
+      
+      <!-- Bottom border -->
+      <div class="w-full h-[0.5px] bg-gray-400 mb-8"></div>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    <!-- Projects grid -->
+    <div class="projects-grid mb-12">
       {projectsToDisplay.map((project, index) => (
-        <div class="bg-white rounded-lg overflow-hidden shadow-lg h-[500px] flex flex-col">
-          <!-- Image section (2/3 of height) -->
-          <div class="relative h-[330px]">
-            <img 
-              src={project.image} 
-              alt={project.title} 
-              class="w-full h-full object-cover"
-            />
-            <div class="absolute bottom-4 left-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-md">
-              {project.category}
+        <div class={`project-${index + 1}`} key={index}>
+          <a href={project.link} class="block group h-full">
+            <div class="relative overflow-hidden h-full">
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <!-- Hover overlay -->
+              <div class="absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <h3 class="text-lg font-bold text-primary">{project.title}</h3>
+                <p class="text-gray-700 text-sm line-clamp-2">{project.description}</p>
+              </div>
             </div>
-          </div>
-          
-          <!-- Content section (1/3 of height) -->
-          <div class="p-6 flex flex-col flex-1">
-            <h3 class="text-xl font-bold text-primary mb-2">{project.title}</h3>
-            <p class="text-gray-600 text-sm mb-4 line-clamp-2">{project.description}</p>
-            <div class="mt-auto flex justify-between items-center">
-              <span class="text-xs text-gray-500">Client: {project.client}</span>
-              <a 
-                href={project.link} 
-                class="inline-flex items-center text-sm font-medium text-primary hover:text-secondary-dark transition-colors"
-              >
-                View Project
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
-            </div>
-          </div>
+          </a>
         </div>
       ))}
     </div>
-
-    <div class="mt-12 text-center">
+    
+    <div class="flex flex-col gap-3 justify-center md:flex-row lg:flex-row lg:gap-4">
       <a 
-        href="/projectss" 
-        class="inline-flex items-center px-6 py-3 bg-white border-2 border-white text-primary font-medium rounded-md hover:bg-primary hover:text-white transition-colors duration-200"
+        href="/contact" 
+        class="px-6 py-4 lg:px-8 bg-black text-white text-center rounded-full font-semiboldfont-medium hover:text-white hover:bg-primary/90 transition-colors duration-200"
       >
-        View All Projects
-        <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        Get a quote
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 inline-block ml-2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
+      </a>
+      
+      <a 
+        href="/projects" 
+        class="px-6 py-4 lg:px-8 border border-black text-black text-center rounded-full font-medium hover:text-white hover:bg-primary transition-colors duration-200"
+      >
+        Browse Projects
       </a>
     </div>
   </div>

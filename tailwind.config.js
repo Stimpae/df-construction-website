@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#37363b',
+          DEFAULT: '#0a0a0a',
           light: '#434248',
 
         },
@@ -23,7 +23,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Arial', ...defaultTheme.fontFamily.sans],
-        heading: ['Poppins', ...defaultTheme.fontFamily.sans],
+        heading: ['Mona Sans', ...defaultTheme.fontFamily.sans],
       },
     },
   },

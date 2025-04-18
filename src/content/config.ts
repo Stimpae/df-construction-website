@@ -21,7 +21,6 @@ const testimonialsCollection = defineCollection({
     position: z.string().optional(),
     company: z.string().optional(),
     testimonial: z.string(),
-    rating: z.number().min(1).max(5),
     date: z.string(),
     projectType: z.string(),
     image: z.string().optional(),
